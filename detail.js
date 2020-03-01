@@ -1,5 +1,4 @@
-const queryString = document.location.search;
-const params = new URLSearchParams(queryString);
+const params = new URLSearchParams(document.location.search);
 
 let id;
 
@@ -7,11 +6,9 @@ if (params.has("id")) {
   id = params.get("id");
 } else {
   document.location.href = "/";
-  console.log("Hello");
 }
 
-const showUrl = "http://api.tvmaze.com/shows/1";
-const detailURl = `${showUrl}${id}`;
+const detailURl = `http://api.tvmaze.com/shows/${id}`;
 
 fetch(detailURl)
   .then(function(response) {
@@ -51,4 +48,9 @@ function showDetails(json) {
 const accordion = document.querySelector(".accordion-menu");
 accordion.addEventListener("click", showShedule);
 
-function showShedule(event) {}
+function showShedule(event) {
+  accordion.nextElementSibling.classList.toggle('blockInformation')
+
+
+
+}

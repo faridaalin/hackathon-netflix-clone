@@ -3,24 +3,25 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
   <title>Detail Page</title>
 </head>
 
 <body>
-
   <header>
-    <nav>
-      <a href="">LOGO</a>
+    <nav class="search-bar">
+      <div class="menu">
+        <ul>
+          <li><a class="menu-active" href="/">HOME</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+      <div class="search-box">
+        <input type="text" name="search" id="" class="tbox" placeholder="Search..">
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+      </div>
     </nav>
-    <form action="" id="search-box">
-      <label for="site-search">Search for shows:</label>
-      <input type="search" id="site-search" name="q" aria-label="Search through site content">
-    </form>
-
-    <button>Search</button>
-  </header>
   </header>
 
   <main>
@@ -32,6 +33,7 @@
         <p class="summary">Add description here!!</p>
         <p class="language">language</p>
         <p class="genres">genres</p>
+
         <button class="accordion-menu">Schedule</button>
         <div class="panel">
           <p class="schedule"></p>

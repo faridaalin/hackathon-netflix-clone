@@ -1,31 +1,49 @@
-const tvShowUrl = "http://api.tvmaze.com/schedule/";
+const tvShowUrl = "http://api.tvmaze.com/shows";
 
 fetch(tvShowUrl)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(json) {
-    displayShows(json);
-  })
-  .catch(function(error) {
-    console.log(error);
+  .then(response => response.json())
+  .then(json => displayShows(json))
+  .catch(error => console.log(error));
+
+const displayShows = (json) => {
+  const ul = document.querySelector(".cards");
+
+  json.forEach(show => {
+    ul.innerHTML += `<li class="cards_item">
+   <div class="card">
+
+     <div class="card_image">
+     <img src="${show.image.medium}" alt="${show.name}">
+     </div>
+
+     <div class="card_content">
+       <h2 class="card_title">${show.name}</h2>
+       <p class="card_text"></p>
+       <button class="btn card_btn details"><a href="detailpage.html?id=${show.id}">Read More</a></button>
+     </div>
+
+   </div>
+ </li>`
   });
 
-function displayShows(json) {
-  const tvShows = json;
+  const searchBtn = document.querySelector(".search-btn");
+  searchBtn.addEventListener("click", showSearch);
 
-  const mainContainer = document.querySelector("main");
+  function showSearch(event) {
+    const searchInput = document.querySelector("#searchInput");
+    const searchInputValue = searchInput.value.toLowerCase().trim();
+    let filteredSearch = "";
 
-  tvShows.forEach(tvShow => {
+    filteredSearch = json.filter(show => {
+      if (show.name.toLowerCase().includes(searchInputValue)) {
+        return show.name.toLowerCase();
+      }
+    });
 
-    mainContainer.innerHTML += `<div class="card">
-    <img src="${tvShow.show.image.medium}" alt="">
-    <div class="container">
-      <h3>${tvShow.show.name}</h3>
-      <button><a class="btn details" href="detailpage.html?id=${tvShow.show.id}">More info</a></button>
-    </div>
-  </div>`;
+    const h1 = document.querySelector('h1');
+    h1.innerHTML = `We found ${filteredSearch.length} shows that includes <strong>"${searchInputValue}"</strong>`;
 
-  });
-
+    ul.innerHTML = "";
+    displayShows(filteredSearch);
+  }
 }

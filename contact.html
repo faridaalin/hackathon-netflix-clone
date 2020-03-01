@@ -4,11 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
   <title>Contact Page
 
   </title>
 </head>
 <body>
+  <header>
+    <nav class="search-bar">
+      <div class="menu">
+        <ul>
+          <li><a class="menu-active" href="/">HOME</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+      <div class="search-box">
+        <input type="text" name="search" id="" class="tbox" placeholder="Search..">
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-contact-form">
+    <form>
+      <div>
+      <label for="fname">First Name</label>
+      <input type="text" class="fname" id="fname" name="firstname" placeholder="Your name..">
+      <p class="error" id="fNameError">Please enter your first name.</p>
+
+      <label for="lname">Last Name</label>
+      <input type="text" class="lname" id="lname" name="lastname" placeholder="Your last name..">
+      <p class="error" id="lNameError">Please enter your last name.</p>
+
+      <label for="email">Email</label>
+      <input type="email" class="email" id="email" name="email" placeholder="Enter your email">
+      <p class="error" id="emailError">Please enter a valid email address.</p>
+
+      <label for="phone">Phone number</label>
+      <input type="tel" class="phone" id="phone" name="phone" placeholder="Enter your phone number">
+      <p class="error" id="phoneError">Please enter a valid phone number.</p>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  </main>
 
 
 <script src="contact.js"></script>

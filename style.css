@@ -1,60 +1,213 @@
-body {
-  padding: 0;
-  margin: 0;
-  background-color: red;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
+
+/* Font */
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
 
 header {
-  margin-bottom: 10%;
-  width: 100%;
   background-color: black;
-  color: black;
-  text-align: center;
 }
 
-label {
-  display: block;
-  font: 1rem 'Fira Sans', sans-serif;
+
+body {
+  color: #272727;
+  font-family: 'Quicksand', serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  padding: 0;
+  margin: 0;
+  background-color: firebrick;
 }
 
-input,
-label {
-  margin: .4rem 0;
-}
-
-main {
+.nav {
   display: flex;
-  flex-flow: wrap;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
+}
+
+.menu {
+  Display: inline-block;
+  margin-right: auto;
 }
 
 
-.card  {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 20%;
-  border-radius: 5px;
-  background: white;
+
+.menu ul {
+  display: flex;
+  list-style: none;
 }
 
-.card-detail {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 80%;
+.menu ul li {
+  display: inline-block;
+  padding: 0 22px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+nav ul li a:hover{
+  color: firebrick;
+  cursor: pointer;
+}
+
+
+.search-box {
+  margin: 10px 25px;
+  display: inline-block;
+}
+
+.tbox {
+padding: 10px;
+width: 250px;
+}
+
+.search-btn {
+  width: 50px;
+  background: firebrick;
+  border: none;
+  height: 37px;
+}
+
+ main{
+  max-width: 1200px;
   margin: 0 auto;
-  border-radius: 5px;
-  background: white;
-  margin-bottom: 10%;
+}
+
+ .main-contact-form{
+  padding: 10% 0;
+  width: 90%;
+  margin: auto;
+}
+
+h1 {
+  font-weight: 400;
+  padding-top: 2%;
+  text-align: center;
+  color: black;
 }
 
 img {
-  border-radius: 5px 5px 0 0;
+  height: auto;
   width: 100%;
+  vertical-align: middle;
 }
 
-.detail-img {
-  height: 50%;
-  width: auto;
+.btn {
+  color: black;
+  padding: 0.8rem;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: firebrick;
+
 }
+
+.btn a {
+  text-decoration: none;
+  display: block;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #e8837b;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards_item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+}
+
+
+
+.card {
+  background-color: black;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+}
+
+.card_content {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card_title {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 0px;
+  padding-bottom: 15%;
+}
+
+.card_text {
+  color: white;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  font-weight: 400;
+}
+.made_by{
+  font-weight: 400;
+  font-size: 13px;
+  margin-top: 35px;
+  text-align: center;
+}
+
+
+@media all and (min-width: 600px) {
+
+  .cards_item {
+    width: 50%;
+  }
+}
+@media all and (min-width: 800px) {
+
+  .cards_item {
+    width: 25%;
+  }
+}
+
+
+/*Detail page*/
+
+.card-detail {
+    display: flex;
+    flex-direction: row;
+    margin: 50px auto;
+}
+
+
 
 .accordion {
   background-color: #eee;
@@ -73,15 +226,41 @@ img {
   background-color: #ccc;
 }
 
+.accordion-menu {
+  background-color: beige;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 50%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
 .panel {
   padding: 0 18px;
   display: none;
   background-color: white;
   overflow: hidden;
+  width: 50%;
+}
+
+.blockInformation {
+  display: block;
+}
+
+.panel p {
+  font-size: 14px;
 }
 
 .container {
   padding: 2px 16px;
+  color: black
+}
+
+.container p:nth-child(3), p:nth-child(4) {
+  font-weight: bold;
 }
 
 footer {
@@ -96,3 +275,51 @@ footer {
   background-color: black;
   color: white;
   text-align: center;
+}
+
+/*Form*/
+
+form {
+  width: 50%;
+  margin: auto;
+}
+
+form div {
+  border-radius: 5px;
+  background-color: beige;
+  padding: 20px;
+}
+
+form .fname, .lname, .email, .phone {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form input[type=submit] {
+  width: 100%;
+  background-color: #235825;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form .error {
+  color: red;
+  display: none;
+}
+
+form  input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+
+
