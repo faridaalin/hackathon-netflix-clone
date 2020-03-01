@@ -302,7 +302,7 @@ form .fname, .lname, .email, .phone {
 
 form input[type=submit] {
   width: 100%;
-  background-color: #235825;
+  background-color: #1e5d20;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -317,7 +317,7 @@ form .error {
 }
 
 form  input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #3a7b3d;
 }
 
 

@@ -15,8 +15,10 @@ function formValidation(event) {
   const lNameError = document.querySelector("#lNameError");
 
   const email = document.querySelector("#email");
-  const emailValue = email.value.trim().length;
   const emailError = document.querySelector("#emailError");
+
+  const phone = document.querySelector("#phone");
+  const phoneError = document.querySelector("#phoneError");
 
   if (fNameValue > 0) {
     fNameError.style.display = "none";
@@ -30,14 +32,19 @@ function formValidation(event) {
     lNameError.style.display = "block";
   }
 
-  if (emailValue > 0 && !emailValidate(email.value.trim)) {
+  const regExEmail = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
+  if (regExEmail.test(email.value.trim())) {
     emailError.style.display = "none";
   } else {
     emailError.style.display = "block";
   }
+
+  const regExPhone = /^[0-9]{8}$/;
+  if (regExPhone.test(phone.value.trim())) {
+    phoneError.style.display = "none";
+  } else {
+    phoneError.style.display = "block";
+  }
 }
 
-function emailValidate(email) {
-  const regEx = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
-  return regEx.test(email);
-}
+
