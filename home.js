@@ -5,25 +5,16 @@ fetch(tvShowUrl)
   .then(json => displayShows(json))
   .catch(error => console.log(error));
 
-const displayShows = (json) => {
-  const ul = document.querySelector(".cards");
+const displayShows = json => {
+  const cards = document.querySelector(".cards");
 
   json.forEach(show => {
-    ul.innerHTML += `<li class="cards_item">
-   <div class="card">
-
-     <div class="card_image">
-     <img src="${show.image.medium}" alt="${show.name}">
-     </div>
-
-     <div class="card_content">
-       <h2 class="card_title">${show.name}</h2>
-       <p class="card_text"></p>
-       <button class="btn card_btn details"><a href="detailpage.html?id=${show.id}">Read More</a></button>
-     </div>
-
-   </div>
- </li>`
+    cards.innerHTML +=
+    `<div class="card-item">
+    <figure>
+    <img class="image" src="${show.image.medium}" alt="${show.name}">
+    <button class="btn" id="btn"><a href="detailpage.html?id=${show.id}">View</a></button>
+    </figure></div>`;
   });
 
   const searchBtn = document.querySelector(".search-btn");
@@ -40,10 +31,10 @@ const displayShows = (json) => {
       }
     });
 
-    const h1 = document.querySelector('h1');
+    const h1 = document.querySelector("h1");
     h1.innerHTML = `We found ${filteredSearch.length} shows that includes <strong>"${searchInputValue}"</strong>`;
 
     ul.innerHTML = "";
     displayShows(filteredSearch);
   }
-}
+};

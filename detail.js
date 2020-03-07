@@ -7,11 +7,11 @@ if (params.has("id")) {
 } else {
   document.location.href = "/";
 }
-
-const SHOW_URL = `http://api.tvmaze.com/shows/${id}`;
-const EPISODES_URL = `http://api.tvmaze.com/shows/${id}/episodes`;
-const SEASONS_URL = `http://api.tvmaze.com/shows/${id}/seasons`;
-const CAST_URL = `http://api.tvmaze.com/shows/${id}/cast`;
+const corsAllow = `https://cors-anywhere.herokuapp.com/`;
+const SHOW_URL = `${corsAllow}http://api.tvmaze.com/shows/${id}`;
+const EPISODES_URL = `${corsAllow}http://api.tvmaze.com/shows/${id}/episodes`;
+const SEASONS_URL = `${corsAllow}http://api.tvmaze.com/shows/${id}/seasons`;
+const CAST_URL = `${corsAllow}http://api.tvmaze.com/shows/${id}/cast`;
 
 fetch(SHOW_URL)
   .then(response => response.json())
@@ -23,7 +23,18 @@ fetch(CAST_URL)
   .then(json => showCast(json))
   .catch(error => console.log(error));
 
+fetch(SEASONS_URL)
+  .then(response => response.json())
+  .then(json => showSeason(json))
+  .catch(error => console.log(error));
+
+fetch(EPISODES_URL)
+  .then(response => response.json())
+  .then(json => showEpisodes(json))
+  .catch(error => console.log(error));
+
 function showDetails(detail) {
+  console.dir(detail);
 
   let backgroundImage = document.querySelector(".background-image");
   backgroundImage.style.backgroundImage = `url(${detail.image.original})`;
@@ -33,16 +44,10 @@ function showDetails(detail) {
 
   const description = document.querySelector(".subtitle");
   description.innerHTML = detail.summary;
+
+  const schedule = document.querySelector("#schedule > div");
+  schedule.innerHTML = `<p>${detail.schedule.time}</p><p>${detail.schedule.days}</p>`;
 }
-
-
-
-
-
-
-
-
-
 
 function showCast(cast) {
   let actorsResult = [];
@@ -60,53 +65,61 @@ const carouselContent = document.querySelectorAll(".carousel-content");
 const tabButtons = document.querySelectorAll(".tabs-item");
 
 tabButtons.forEach(button => {
-  button.addEventListener("click", showTabContet);
+  button.addEventListener("click", showTabContent);
 
-  function showTabContet(event) {
-    tabButtons.forEach(removeActive => {
-      removeActive.className = removeActive.className.replace("is-active", "");
-    });
-
+  function showTabContent(event) {
+    removeActiveClass(tabButtons);
     const tabDataValue = button.dataset.target;
 
-    carouselContent.forEach(content => {
-      content.style.display = "none";
-      const carouselId = content.id;
+    carouselContent.forEach(carouselItem => {
+      carouselItem.style.display = "none";
+      const carouselId = carouselItem.id;
 
       if (tabDataValue === carouselId) {
-        content.style.display = "block";
+        carouselItem.style.display = "block";
         event.target.parentNode.classList.add("is-active");
       } else {
-        content.style.display = "none";
+        carouselItem.style.display = "none";
       }
     });
   }
 });
 
+function removeActiveClass(buttons) {
+  buttons.forEach(removeActive => {
+    removeActive.className = removeActive.className.replace("is-active", "");
+  });
+}
 
+function showSeason(seasons) {
+  console.dir(seasons);
 
+  seasons.forEach(season => {
+    let seasonImage = "";
 
+    const carouselInner = document.querySelector("#seasons");
+    const carrSeasons = carouselInner.querySelector("div");
 
+    season.image
+      ? (seasonImage = season.image.medium)
+      : (seasonImage = "https://via.placeholder.com/130x180.jpg");
 
+    carrSeasons.innerHTML += `<img src="${seasonImage}" alt="">`;
+  });
+}
 
+function showEpisodes(episodes) {
+  episodes.forEach(episode => {
+    console.dir(episode)
+    let epsiodeImage;
 
+    episode.image
+      ? (epsiodeImage = episode.image.medium)
+      : (epsiodeImage = "https://bulma.io/images/placeholders/1280x960.png");
 
-
-fetch(SEASONS_URL)
-  .then(response => response.json())
-  .then(json => showSeason(json))
-  .catch(error => console.log(error));
-
-  function showSeason(season) {
-    console.log(season)
-    season.forEach(seasonImage => {
-      const img = seasonImage.image.medium
-      //console.dir(seasonImage.image.medium)
-
-      const carouselInner = document.querySelector('#seasons')
-      const carrSeasons = carouselInner.querySelector('div')
-      carrSeasons.innerHTML += `<img src="${img}" alt="">`
-    });
-
-
-  }
+    const carouselInner = document.querySelector("#episodes");
+    const carrEpisodes = carouselInner.querySelector("div");
+    carrEpisodes.innerHTML += `<figure><img src="${epsiodeImage}" alt="${episode.name}">
+  <p class="episodes-details">s${episode.season} e${episode.number}</p></figure>`;
+  });
+}
